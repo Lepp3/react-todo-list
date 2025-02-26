@@ -1,14 +1,27 @@
+import { useEffect, useState} from "react"
 import TodoListItem from "./TodoListItem"
 
-const todos = [
-    'Paint the room',
-    'Fix the carpet',
-    'Return furniture'
-]
+
 
 
 
 export default function TodoList(){
+
+
+    const [todos,setTodos] = useState([]);
+    console.log(todos);
+
+    useEffect(()=>{
+        const url = 'http://localhost:3030/jsonstore/todos';
+        fetch(url)
+        .then(res => res.json())
+        .then(data =>{
+            setTodos(data);
+        }).catch(err=>{
+            console.log(err.message);
+        })
+    },[])
+
     return(
         <section className="todo-list-container">
         <h1>Todo List</h1>
