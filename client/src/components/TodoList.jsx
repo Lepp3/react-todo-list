@@ -59,17 +59,7 @@ export default function TodoList(){
                 isCompleted={todo.isCompleted}/>
               )}
   
-              <tr className="todo">
-                <td>Vacuum floor</td>
-                <td>Incomplete</td>
-                <td className="todo-action">
-                  <button className="btn todo-btn">Change status</button>
-                </td>
-              </tr>
-  
               
-              
-  
               
             </tbody>
           </table>
