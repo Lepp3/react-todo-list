@@ -9,14 +9,15 @@ export default function TodoList(){
 
 
     const [todos,setTodos] = useState([]);
-    console.log(todos);
+    
 
     useEffect(()=>{
         const url = 'http://localhost:3030/jsonstore/todos';
         fetch(url)
         .then(res => res.json())
         .then(data =>{
-            setTodos(data);
+          const result = Object.values(data);
+            setTodos(result);
         }).catch(err=>{
             console.log(err.message);
         })
@@ -51,7 +52,12 @@ export default function TodoList(){
             <tbody>
   
               {/* <!-- Todo item --> */}
-              <TodoListItem/>
+              {todos.map(todo=>
+                <TodoListItem
+                key={todo._id}
+                text={todo.text}
+                isCompleted={todo.isCompleted}/>
+              )}
   
               <tr className="todo">
                 <td>Vacuum floor</td>
