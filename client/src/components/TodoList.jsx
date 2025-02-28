@@ -23,7 +23,12 @@ export default function TodoList(){
         }).catch(err=>{
             console.log(err.message);
         })
-    },[])
+    },[]);
+
+
+    const statusChangeHandler = (todoId) =>{
+      setTodos(oldTodos => oldTodos.map(todo=> todo._id === todoId ? {...todo,isCompleted: !todo.isCompleted}: {...todo}))
+    }
 
     return(
         <section className="todo-list-container">
@@ -58,8 +63,10 @@ export default function TodoList(){
               {todos.map(todo=>
                 <TodoListItem
                 key={todo._id}
+                todoId={todo._id}
                 text={todo.text}
-                isCompleted={todo.isCompleted}/>
+                isCompleted={todo.isCompleted}
+                onStatusChange={statusChangeHandler}/>
               )}
   
               
